@@ -1,8 +1,5 @@
 (async function () {
-
-    // test env vars
-    document.querySelector('div#test').textContent = testEnvVar;
-    
+   
     let quiz = await getQuiz();
 
     let current = -1;
