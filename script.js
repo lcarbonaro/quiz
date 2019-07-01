@@ -1,7 +1,7 @@
 (async function () {
 
     // test env vars
-    document.querySelector('div#test').textContent = process.env.TEST;
+    document.querySelector('div#test').textContent = testEnvVar;
     
     let quiz = await getQuiz();
 
