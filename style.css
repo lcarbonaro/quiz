@@ -15,7 +15,7 @@ body {
 }
 
 .flipped {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
 }
 
 .card-inner {
@@ -38,7 +38,7 @@ body {
 .back {
     color: #333;
     background-color: dodgerblue;
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
 }
 
 
