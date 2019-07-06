@@ -34,10 +34,6 @@
   background-color: #ff0;
 }
 
-.front {  
-  background-color: #cf0;
-}
-
 .flipped {
   transform: rotateY(180deg);
 }
