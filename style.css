@@ -19,6 +19,7 @@
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1.5s;
+  perspective: 1000px;
 }
 
 .back, .front {
