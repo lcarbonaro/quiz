@@ -38,7 +38,7 @@
     function prevCard() {
         card.classList.remove('flipped');
         setTimeout(()=>{
-            current = Math.abs(current - 1) % quiz.length;            
+            current = (current - 1 < 0 ? 0 : current -1) % quiz.length;            
             front.textContent = quiz[current].question;
             back.textContent = quiz[current].answer;
         }, 500);        
