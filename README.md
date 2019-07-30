@@ -1,5 +1,9 @@
 # quiz
 
+This is part 2 of a two-part series covering a full-stack application example.
+
+In this part we walk through setting up the front-end, which calls the back-end data API we coded in part 1.
+
 Related Links & References:
 
 - [Card flip CSS example 1](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_card)
