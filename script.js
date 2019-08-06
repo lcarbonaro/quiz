@@ -1,54 +1,48 @@
-(async function () {
+let front = document.querySelector('.front p');
+let back = document.querySelector('.back p');
+let card = document.querySelector('.card');
 
-    let front = document.querySelector('.front > p');
-    let back  = document.querySelector('.back > p');
-    let card  = document.querySelector('div.card');
+document.querySelector('#btnPrev').addEventListener('click', prevCard);
+document.querySelector('#btnFlip').addEventListener('click', flipCard);
+document.querySelector('#btnNext').addEventListener('click', nextCard);
 
-    document.querySelector('#btnPrev').addEventListener('click', prevCard);
-    document.querySelector('#btnFlip').addEventListener('click', flipCard);
-    document.querySelector('#btnNext').addEventListener('click', nextCard);
-   
-    let quiz = await getQuiz();
 
-    /* test data */
-    /*
-    let quiz = [
-        {question:"Q#1", answer:"A#1"},
-        {question:"Q#2", answer:"A#2"},
-        {question:"Q#3", answer:"A#3"}
-    ];
-    */    
+let quiz = [];
+getQuiz();
 
-    let current = -1;
+let currentCard = -1;
+
+function getQuiz() {
+    fetch('https://us-central1-quiz-eef08.cloudfunctions.net/getData')
+    .then( resp => resp.json())
+    .then( respJson => {
+        quiz = respJson;
+    })
+    .catch(err => {
+        console.error(err);
+    });
+}
+
+function prevCard() {
+    card.classList.remove('flipped');
+    setTimeout(() => {
+        currentCard = currentCard - 1 < 0 ? currentCard : currentCard - 1;
+        front.textContent = quiz[currentCard].question;
+        back.textContent = quiz[currentCard].answer;
+    }, 500);
     
-    async function getQuiz() {
-        let resp = await fetch('https://us-central1-quiz-eef08.cloudfunctions.net/getData');
-        let respJson = await resp.json();
-        return respJson;        
-    }    
+}
 
-    function nextCard() {
-        card.classList.remove('flipped');
-        setTimeout(()=>{
-            current = (current + 1) % quiz.length;            
-            front.textContent = quiz[current].question;
-            back.textContent = quiz[current].answer;
-        }, 500);        
-    }
-
-    function prevCard() {
-        card.classList.remove('flipped');
-        setTimeout(()=>{
-            current = Math.abs(current - 1) % quiz.length;            
-            front.textContent = quiz[current].question;
-            back.textContent = quiz[current].answer;
-        }, 500);        
-    }
+function nextCard() {
+    card.classList.remove('flipped');
+    setTimeout(()=>{
+        currentCard = currentCard + 1 >= quiz.length ? currentCard : currentCard + 1;
+        front.textContent = quiz[currentCard].question;
+        back.textContent = quiz[currentCard].answer;        
+    }, 500);
     
-    function flipCard() {
-        card.classList.toggle('flipped');
-    }
+}
 
-})();
-
-
+function flipCard() {
+    card.classList.toggle('flipped');
+}
